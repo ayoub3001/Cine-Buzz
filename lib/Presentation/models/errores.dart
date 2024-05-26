@@ -1,0 +1,1 @@
+enum Errores { errorNoInternet, errorNoConnectWithApi }

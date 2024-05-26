@@ -1,20 +1,23 @@
+import 'package:cine_buzz/Presentation/Bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import "package:flutter_bloc/flutter_bloc.dart";
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'UI/screens/page_home.dart';
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(const MyBlocProvider());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyBlocProvider extends StatelessWidget {
+  const MyBlocProvider({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Scaffold(),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+          create: (context) => GetInformationCubit()..sendDataPopular())
+    ], child: const PageHome());
   }
 }
