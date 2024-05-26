@@ -14,7 +14,7 @@ class _BuildingInformationState extends State<BuildingInformation> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetInformationCubit, GetInformationState>(
         builder: (context, state) {
-      return Container(
+      return SizedBox(
         height: 200,
         child: GridView.count(
             crossAxisCount: 2,

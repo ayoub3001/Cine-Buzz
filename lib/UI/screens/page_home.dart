@@ -1,5 +1,4 @@
 import 'package:cine_buzz/Presentation/Bloc/cubit/get_information_cubit.dart';
-import 'package:cine_buzz/UI/screens/building_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -125,7 +124,7 @@ class _PageHomeState extends State<PageHome> {
               child: BlocBuilder<GetInformationCubit, GetInformationState>(
                   builder: (context, state) {
                 return Container(
-                  margin: EdgeInsets.only(bottom: 20),
+                  margin: const EdgeInsets.only(bottom: 20),
                   child: GridView.count(
                     crossAxisCount: 2,
                     crossAxisSpacing: 5,
