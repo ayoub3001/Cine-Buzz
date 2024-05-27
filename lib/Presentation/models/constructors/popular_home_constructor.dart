@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../UI/widgets/popup_sheet.dart';
 import '../pelicula.dart';
 
 class PopularHomeConstructor extends StatelessWidget {
@@ -8,10 +9,19 @@ class PopularHomeConstructor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: Image.network(
-        data.portadaHome,
+    return GestureDetector(
+      onTap: () {
+        showActionSheet(context, data);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          child: Image.network(
+            data.portadaHome,
+            fit: BoxFit.fill,
+          ),
+        ),
       ),
     );
   }

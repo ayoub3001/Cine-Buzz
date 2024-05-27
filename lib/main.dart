@@ -17,7 +17,7 @@ class MyBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-          create: (context) => GetInformationCubit()..sendDataPopular())
+          create: (context) => GetInformationCubit()..sendDataPopular(context))
     ], child: const PageHome());
   }
 }

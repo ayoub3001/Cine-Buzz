@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cine_buzz/Presentation/models/errores.dart';
 import 'package:cine_buzz/Presentation/models/info_json/rated_json.dart';
 import 'package:cine_buzz/Presentation/models/pelicula.dart';
@@ -12,6 +14,7 @@ import "package:connectivity_plus/connectivity_plus.dart";
 import '../../models/constructors/popular_home_constructor.dart';
 import '../../models/constructors/rated_home_constructor.dart';
 import '../../models/info_json/popular_json.dart';
+import 'package:intl/intl.dart';
 
 part 'get_information_state.dart';
 
@@ -32,7 +35,7 @@ class GetInformationCubit extends Cubit<GetInformationState> {
 
   bool stateBoolPeliculaList = true;
 
-  void getInformation() async {
+  void getInformation(context) async {
     try {
       final connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult == ConnectivityResult.none) {
@@ -65,49 +68,81 @@ class GetInformationCubit extends Cubit<GetInformationState> {
         }
       }
     } catch (err) {
-      if (err == Errores.errorNoConnectWithApi) {
-        // ignore: avoid_print
-        print("Hubo un error al conetarse con la API");
-      }
-      if (err == Errores.errorNoInternet) {
-        // ignore: avoid_print
-        print("No tienes internet");
+      if (err == Errores.errorNoConnectWithApi ||
+          err == Errores.errorNoInternet) {
+        print("NO conexion api");
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Hubo un error"),
+                content: const Text("Reinice la App porfavor"),
+                actions: [
+                  FloatingActionButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Volver"),
+                  )
+                ],
+              );
+            });
+      } else if (err == Errores.errorNoInternet) {
+        print("NO conexion internet");
+
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Sin Conexion"),
+                content: const Text(
+                    "No hay Conexión a Internet, conéctate y vuelve a intentarlo"),
+                actions: [
+                  FloatingActionButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Volver"),
+                  )
+                ],
+              );
+            });
       }
     }
   }
 
-  void sendDataPopular() {
+  void sendDataPopular(context) {
     stateBoolPeliculaList = true;
-    getInformation();
+    getInformation(context);
   }
 
-  void sendDataRated() {
+  void sendDataRated(context) {
     stateBoolPeliculaList = false;
-    getInformation();
+    getInformation(context);
   }
 
   List<Widget> constructorIformation(
       {required bool state, required List data}) {
     final List<Widget> listaData = [];
+    var dateFormatter = DateFormat('yyyy-MM-dd');
     for (int index = 0; index < data.length; index++) {
       final direction = data[index];
+      final ano = dateFormatter.format(direction.releaseDate);
       listaData.add(state
           ? PopularHomeConstructor(
               data: Pelicula(
                   portadaDescripcion: consumeImage + direction.backdropPath,
                   portadaHome: consumeImage + direction.posterPath,
                   nombrePelicula: direction.title,
-                  popularidad: direction.popularity,
+                  popularidad: direction.voteAverage,
                   idioma: direction.originalLanguage,
-                  descripcion: direction.overview))
+                  descripcion: direction.overview,
+                  ano: ano))
           : RatedHomeConstructor(
               data: Pelicula(
                   portadaDescripcion: consumeImage + direction.backdropPath,
                   portadaHome: consumeImage + direction.posterPath,
                   nombrePelicula: direction.title,
-                  popularidad: direction.popularity,
+                  popularidad: direction.voteAverage,
                   idioma: direction.originalLanguage,
-                  descripcion: direction.overview)));
+                  descripcion: direction.overview,
+                  ano: ano)));
     }
 
     return listaData;

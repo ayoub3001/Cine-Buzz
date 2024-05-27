@@ -5,6 +5,7 @@ class Pelicula {
   final double popularidad;
   final String idioma;
   final String descripcion;
+  final String ano;
 
   const Pelicula(
       {required this.portadaDescripcion,
@@ -12,5 +13,6 @@ class Pelicula {
       required this.nombrePelicula,
       required this.popularidad,
       required this.idioma,
-      required this.descripcion});
+      required this.descripcion,
+      required this.ano});
 }

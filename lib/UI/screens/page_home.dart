@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Presentation/models/variables.dart';
+import 'building_information.dart';
 
 class PageHome extends StatefulWidget {
   const PageHome({super.key});
@@ -59,7 +60,9 @@ class _PageHomeState extends State<PageHome> {
                         stateIcon2 = false;
                       });
 
-                      context.read<GetInformationCubit>().sendDataPopular();
+                      context
+                          .read<GetInformationCubit>()
+                          .sendDataPopular(context);
                     },
                     child: Container(
                         height: 30,
@@ -86,7 +89,9 @@ class _PageHomeState extends State<PageHome> {
                         stateIcon2 = true;
                       });
 
-                      context.read<GetInformationCubit>().sendDataRated();
+                      context
+                          .read<GetInformationCubit>()
+                          .sendDataRated(context);
                     },
                     child: Container(
                         height: 30,
@@ -120,20 +125,7 @@ class _PageHomeState extends State<PageHome> {
                     fontSize: 20),
               ),
             ),
-            Expanded(
-              child: BlocBuilder<GetInformationCubit, GetInformationState>(
-                  builder: (context, state) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: [for (Widget widget in state.constructor) widget],
-                  ),
-                );
-              }),
-            )
+            const BuildingInformation()
           ],
         ),
       ),

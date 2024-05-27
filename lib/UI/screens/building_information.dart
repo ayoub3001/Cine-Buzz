@@ -12,16 +12,25 @@ class BuildingInformation extends StatefulWidget {
 class _BuildingInformationState extends State<BuildingInformation> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetInformationCubit, GetInformationState>(
-        builder: (context, state) {
-      return SizedBox(
-        height: 200,
-        child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-            children: [for (Widget widget in state.constructor) widget]),
-      );
-    });
+    return Expanded(
+      child: BlocBuilder<GetInformationCubit, GetInformationState>(
+          builder: (context, state) {
+        if (state.constructor.isNotEmpty) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              children: [for (Widget widget in state.constructor) widget],
+            ),
+          );
+        } else {
+          return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [CircularProgressIndicator()]);
+        }
+      }),
+    );
   }
 }
