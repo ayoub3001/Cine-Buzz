@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cine_buzz/Presentation/models/errores.dart';
 import 'package:cine_buzz/Presentation/models/info_json/rated_json.dart';
 import 'package:cine_buzz/Presentation/models/pelicula.dart';
