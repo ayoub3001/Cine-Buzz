@@ -15,5 +15,5 @@ Cine Buzz es una aplicación móvil desarrollada en Flutter que proporciona a lo
 
 # Capturas de Pantalla
 
-<img src="https://https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_1.png" alt="Screen One" width="300"> <img src="https://https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_2.png" alt="Screen Two" width="300"> 
-<img src="https://https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_3.png" alt="Screen Three" width="300"> <img src="https://https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_4.png" alt="Screen Four" width="300">
+<img src="https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_1.png" alt="Screen One" width="300"> <img src="https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_2.png" alt="Screen Two" width="300"> 
+<img src="https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_3.png" alt="Screen Three" width="300"> <img src="https://github.com/ayoub3001/Cine-Buzz/blob/main/assets/images/screen_4.png" alt="Screen Four" width="300">
