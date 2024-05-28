@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //COLOR AZUL GENERAL
-const Color coloAzulFondos = Color.fromARGB(255, 0, 62, 113);
+const Color colorGrisFondos = Color(0xFF1E1E1E);
 
 //COLOR AZUL TEXTO
-const Color colorAzulText = Color.fromARGB(255, 31, 88, 128);
+const Color colorGrisText = Color(0xFF1E1E1E);

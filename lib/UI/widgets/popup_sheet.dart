@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../Presentation/models/pelicula.dart';
 
+//Esta Widget es el que se encarga de mostrar la información detallada de cada película.
 void showActionSheet(context, Pelicula data) {
   showModalBottomSheet(
     backgroundColor: Colors.transparent,
@@ -14,8 +15,9 @@ void showActionSheet(context, Pelicula data) {
                 0.8, // Límite máximo de altura (80% de la altura de la pantalla)
           ),
           child: Container(
+            padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 1, 76, 141),
+              color: Color(0xFF1E1E1E),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
@@ -39,7 +41,8 @@ void showActionSheet(context, Pelicula data) {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   child: Row(
                     children: [
-                      SizedBox(
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8),
                         height: 200,
                         width: MediaQuery.of(context).size.width / 3,
                         child: ClipRRect(
@@ -53,7 +56,7 @@ void showActionSheet(context, Pelicula data) {
                       ),
                       Expanded(
                         child: Container(
-                          margin: const EdgeInsets.only(left: 5),
+                          margin: const EdgeInsets.only(left: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -71,18 +74,16 @@ void showActionSheet(context, Pelicula data) {
                                 margin: const EdgeInsets.only(top: 10),
                                 child: Text(
                                   data.ano,
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 197, 197, 197),
-                                  ),
+                                  style: TextStyle(
+                                      color: Colors.grey[300], fontSize: 14),
                                 ),
                               ),
                               Container(
                                 margin: const EdgeInsets.only(top: 10),
                                 child: Text(
                                   "Idioma: ${data.idioma}",
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 197, 197, 197),
-                                  ),
+                                  style: TextStyle(
+                                      color: Colors.grey[300], fontSize: 14),
                                 ),
                               ),
                               Container(
@@ -92,8 +93,8 @@ void showActionSheet(context, Pelicula data) {
                                 child: Text(
                                   "${data.popularidad.toStringAsFixed(1)}/10",
                                   style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40,
+                                    color: Colors.amber,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ),
@@ -112,9 +113,28 @@ void showActionSheet(context, Pelicula data) {
                     maxLines: 100,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
+                      color: Colors.white70,
+                      fontSize: 16,
                     ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * .8,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Colors.amber,
+                    ),
+                    child: const Text("Volver",
+                        style: TextStyle(
+                            color: Color(0xFF1E1E1E),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                        textAlign: TextAlign.center),
                   ),
                 )
               ],

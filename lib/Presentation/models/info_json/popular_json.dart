@@ -4,6 +4,9 @@
 
 // ignore_for_file: file_names
 
+//Esta clase se ha conseguido poniendo el json en quicktype, he copiado la clase de ahi y pegado aqui.
+//Esta clase se encarga basicamente de decodificar el json para usar la información de una manera más sencilla
+//En lugar de llamar a un dato por ejemplo asi: response.data[0]["path_image"] pues con esto se puede hacer asi: response.data[0].pathImage
 import 'dart:convert';
 
 PopularConstructorJson popularConstructorJsonFromJson(String str) =>

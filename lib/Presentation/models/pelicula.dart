@@ -1,3 +1,4 @@
+//Esta clase se encarga de albergar las variables necesarias en cualquier pelicula, tanto Popular como byRated
 class Pelicula {
   final String portadaDescripcion;
   final String portadaHome;

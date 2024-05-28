@@ -20,16 +20,18 @@ class _PageHomeState extends State<PageHome> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: const Color(0xFFF0F0F0),
         body: Column(
           children: [
             Container(
               height: 60,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  color: coloAzulFondos,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25))),
+                color: colorGrisFondos,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25)),
+              ),
               child: const Center(
                 child: Text(
                   "FIND AND ENJOY YOUR MOVIE",
@@ -44,7 +46,7 @@ class _PageHomeState extends State<PageHome> {
               child: const Text(
                 "FILTERS",
                 style: TextStyle(
-                    color: colorAzulText,
+                    color: colorGrisText,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
@@ -68,12 +70,12 @@ class _PageHomeState extends State<PageHome> {
                         height: 30,
                         width: 30,
                         decoration: const BoxDecoration(
-                            color: coloAzulFondos,
+                            color: colorGrisFondos,
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: stateIcon1 == true
                             ? const Icon(
                                 Icons.check,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Colors.amber,
                               )
                             : const SizedBox()),
                   ),
@@ -97,12 +99,12 @@ class _PageHomeState extends State<PageHome> {
                         height: 30,
                         width: 30,
                         decoration: const BoxDecoration(
-                            color: coloAzulFondos,
+                            color: colorGrisFondos,
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: stateIcon2 == true
                             ? const Icon(
                                 Icons.check,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Colors.amber,
                               )
                             : const SizedBox()),
                   ),
@@ -120,10 +122,16 @@ class _PageHomeState extends State<PageHome> {
               child: const Text(
                 "RESULTS",
                 style: TextStyle(
-                    color: colorAzulText,
+                    color: colorGrisText,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              width: MediaQuery.of(context).size.width,
+              height: 2,
+              color: Colors.amber,
             ),
             const BuildingInformation()
           ],

@@ -21,6 +21,7 @@ class GetInformationCubit extends Cubit<GetInformationState> {
 
   final apiKey = dotenv.env["TMDB_API_KEY"].toString();
 
+  //Declaramos las variables con los enlaces sin la key
   final String urlPopular =
       "https://api.themoviedb.org/3/movie/popular?api_key=";
   final String urlRated =
@@ -29,19 +30,25 @@ class GetInformationCubit extends Cubit<GetInformationState> {
 
   final dio = Dio();
 
+  //Esta lista se usa para guardar los widgets (Las imagenes del home...)
   final List<Widget> listaData = [];
 
+  // En caso de que esta variable sea true se emite la lista de peliculas Popular, si es false el byRated
   bool stateBoolPeliculaList = true;
 
+  //Esta funcion es la encargada de realizar la peticion a la api y recibir la informacion.
   void getInformation(context) async {
     try {
+      //Esta variable tiene el resultado del estado del internet
       final connectivityResult = await Connectivity().checkConnectivity();
+      //Si no está conectado a internet ejecutamos el error de no conectado a internet
       if (connectivityResult == ConnectivityResult.none) {
         throw Errores.errorNoInternet;
       } else {
         final responsePopular = await dio.get(urlPopular + apiKey);
         final responseRated = await dio.get(urlRated + apiKey);
 
+        //Aqui mandamos al decodificador del json el resultado de la peticion a la API, esto es solamente para trabajar mejor con los datos.
         final responseDecodePopular =
             PopularConstructorJson.fromJson(responsePopular.data);
         final responseDecodeRated =
@@ -50,57 +57,31 @@ class GetInformationCubit extends Cubit<GetInformationState> {
         final directionPopular = responseDecodePopular.results;
         final directionRated = responseDecodeRated.results;
 
+        //Si el status code de la peticion es igual a 200 pues significa que la peticion ha sido exitosa
         if (responsePopular.statusCode == 200 &&
             responseRated.statusCode == 200) {
           if (stateBoolPeliculaList == true) {
+            //Emitimos al GetInformationState el constructor de la informacion de las peliculas Popular
             emit(GetInformationState(
                 constructor: constructorIformation(
                     state: true, data: directionPopular)));
           } else {
+            //Emitimos al GetInformationState el constructor de la informacion de las peliculas byRated
             emit(GetInformationState(
                 constructor:
                     constructorIformation(state: false, data: directionRated)));
           }
         } else {
+          //En caso de que hubiese algun problema con la petición se ejecuta este error.
           throw Errores.errorNoConnectWithApi;
         }
       }
     } catch (err) {
       if (err == Errores.errorNoConnectWithApi ||
           err == Errores.errorNoInternet) {
-        print("NO conexion api");
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Hubo un error"),
-                content: const Text("Reinice la App porfavor"),
-                actions: [
-                  FloatingActionButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("Volver"),
-                  )
-                ],
-              );
-            });
+        //ERROR
       } else if (err == Errores.errorNoInternet) {
-        print("NO conexion internet");
-
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Sin Conexion"),
-                content: const Text(
-                    "No hay Conexión a Internet, conéctate y vuelve a intentarlo"),
-                actions: [
-                  FloatingActionButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("Volver"),
-                  )
-                ],
-              );
-            });
+        //Sin internet
       }
     }
   }

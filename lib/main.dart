@@ -17,7 +17,9 @@ class MyBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-          create: (context) => GetInformationCubit()..sendDataPopular(context))
+          create: (context) => GetInformationCubit()
+            ..sendDataPopular(
+                context)) //Llamamos al cubit GetInformationCubit y especificamos a la funcion sendDataPopular para que nada más se abra la app se visualicen las peliculas por Popular
     ], child: const PageHome());
   }
 }
